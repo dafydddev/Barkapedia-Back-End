@@ -5,12 +5,14 @@ import { handleAuthErrors, handleCustomErrors, handleServerErrors } from "./erro
 import parksRouter from "./routers/parksRouter";
 import usersRouter from "./routers/usersRouter";
 import reviewsRouter from "./routers/reviewsRouter";
+import { readEndpoints } from "./controllers/endpoints.controllers";
 
 const app: Express = express();
 
 app.use(cors());
 app.use(express.json());
 
+app.get("/api/", readEndpoints);
 app.use("/api/parks", parksRouter);
 app.use("/api/users", usersRouter);
 app.use("/api/reviews", reviewsRouter);
