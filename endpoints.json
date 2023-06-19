@@ -1,0 +1,198 @@
+{
+  "GET /api": {
+    "description": "serves up a json representation of all the available endpoints of the api"
+  },
+  "GET /api/parks": {
+    "description": "serves an array of all the parks",
+    "exampleResponse": [
+      {
+        "id": "park_1",
+        "features": {
+          "isFreeParking": false,
+          "isFree": false,
+          "isParking": false,
+          "hasDisabledAccess": false,
+          "hasAgilityEquipment": true,
+          "isWellLit": true,
+          "isFullyEnclosed": true
+        },
+        "current_average_rating": 4,
+        "address": {
+          "city": "Birmingham",
+          "secondLine": "Jewel Court",
+          "postCode": "B1 3LE",
+          "firstLine": "29 LEGGE LANE"
+        },
+        "size": 6,
+        "website_url": "https://www.parkwebsite.com/",
+        "image_url": "https://www.park.com/",
+        "name": "Shelfield Park",
+        "opening_hours": {
+          "sunday": "8am - 5pm",
+          "saturday": "8am - 5pm",
+          "tuesday": "8am - 5pm",
+          "wednesday": "8am - 5pm",
+          "thursday": "8am - 5pm",
+          "friday": "8am - 5pm",
+          "monday": "8am - 5pm"
+        },
+        "current_review_count": 1,
+        "location": {
+          "long": "-1.902585",
+          "lat": "52.498464"
+        },
+        "phone_number": "07800989434",
+        "desc": "A park containing two full-size football pitches, a football and basketball cage, and a children's soft play area."
+      },
+      {
+        "id": "park_2",
+        "features": {
+          "isFreeParking": false,
+          "isFree": false,
+          "isParking": true,
+          "hasDisabledAccess": true,
+          "hasAgilityEquipment": false,
+          "isWellLit": false,
+          "isFullyEnclosed": true
+        },
+        "current_average_rating": 4.5,
+        "address": {
+          "city": "London",
+          "secondLine": "",
+          "postCode": "W2 2UH",
+          "firstLine": "Hyde Park"
+        },
+        "size": 350,
+        "website_url": "https://www.hydeparkwebsite.com/",
+        "image_url": "https://www.hydepark.com/",
+        "name": "Hyde Park",
+        "opening_hours": {
+          "sunday": "6am - 10:30pm",
+          "saturday": "6am - 10:30pm",
+          "tuesday": "6am - 10:30pm",
+          "wednesday": "6am - 10:30pm",
+          "thursday": "6am - 10:30pm",
+          "friday": "6am - 10:30pm",
+          "monday": "6am - 10:30pm"
+        },
+        "current_review_count": 1,
+        "location": {
+          "long": "-0.166791",
+          "lat": "51.507268"
+        },
+        "phone_number": "01234567890",
+        "desc": "One of London's eight Royal Parks, offering recreational activities, events, and beautiful landscapes."
+      }
+    ]
+  },
+  "GET /api/parks/:park_id": {
+    "description": "serves matching park object when passed a park_id",
+    "queries": {
+      "TODO": "TODO"
+    },
+    "exampleResponse": {
+      "features": {
+        "isFreeParking": false,
+        "isFree": false,
+        "isParking": false,
+        "hasDisabledAccess": false,
+        "hasAgilityEquipment": true,
+        "isWellLit": true,
+        "isFullyEnclosed": true
+      },
+      "current_average_rating": 4,
+      "address": {
+        "city": "Birmingham",
+        "secondLine": "Jewel Court",
+        "postCode": "B1 3LE",
+        "firstLine": "29 LEGGE LANE"
+      },
+      "size": 6,
+      "website_url": "https://www.parkwebsite.com/",
+      "image_url": "https://www.park.com/",
+      "name": "Shelfield Park",
+      "opening_hours": {
+        "sunday": "8am - 5pm",
+        "saturday": "8am - 5pm",
+        "tuesday": "8am - 5pm",
+        "wednesday": "8am - 5pm",
+        "thursday": "8am - 5pm",
+        "friday": "8am - 5pm",
+        "monday": "8am - 5pm"
+      },
+      "current_review_count": 1,
+      "location": {
+        "long": "-1.902585",
+        "lat": "52.498464"
+      },
+      "phone_number": "07800989434",
+      "desc": "A park containing two full-size football pitches, a football and basketball cage, and a children's soft play area."
+    }
+  },
+  "POST /api/park": {
+    "description": "serves a review object by review_id",
+    "exampleResponse": {
+      "review_id": 10,
+      "title": "Build you own tour de Yorkshire",
+      "category": "social deduction",
+      "designer": "Asger Harding Granerud",
+      "owner": "mallionaire",
+      "review_body": "Cold rain pours on the faces of your team of cyclists, you pulled to the front of the pack early and now your taking on exhaustion cards like there is not tomorrow, you think there are about 2 hands left until you cross the finish line, will you draw enough from your deck to cross before the other team shoot passed? Flamee Rouge is a Racing deck management game where you carefully manage your deck in order to cross the line before your opponents, cyclist can fall slyly behind front runners in their slipstreams to save precious energy for the prefect moment to burst into the lead ",
+      "review_img_url": "https://images.pexels.com/photos/258045/pexels-photo-258045.jpeg?w=700&h=700",
+      "created_at": "2021-01-18T10:01:41.251Z",
+      "votes": 10
+    }
+  },
+  "PATCH /api/reviews/:review_id": {
+    "description": "updates votes of a review by review_id, takes an object with inc_votes key and int value (above or below 0) and increments or decrements that reviews votes by the passed value",
+    "exampleRequest": {
+      "inc_votes": 1
+    },
+    "exampleResponse": {
+      "review_id": 1,
+      "title": "Culture a Love of Agriculture With Agricola",
+      "category": "strategy",
+      "designer": "Uwe Rosenberg",
+      "owner": "tickle122",
+      "review_body": "You could sum up Agricola with the simple phrase 'Farmyard Fun' but the mechanics and game play add so much more than that. You'll find yourself torn between breeding pigs, or sowing crops. Its joyeous and rewarding and it makes you think of time spent outside, which is much harder to do these days!",
+      "review_img_url": "https://images.pexels.com/photos/974314/pexels-photo-974314.jpeg?w=700&h=700",
+      "created_at": "2021-01-18T10:00:20.514Z",
+      "votes": 2
+    }
+  },
+  "GET /api/reviews/:review_id/comments": {
+    "description": "serves a comments array with by review_id, sorted by created by date",
+    "exampleResponse": [
+      {
+        "comment_id": 59,
+        "body": "Quis duis mollit ad enim deserunt.",
+        "review_id": 1,
+        "author": "jessjelly",
+        "votes": 3,
+        "created_at": "2021-03-27T19:48:58.110Z"
+      },
+      {
+        "comment_id": 60,
+        "body": "Laboris nostrud ea ex occaecat aute quis consectetur anim.",
+        "review_id": 1,
+        "author": "cooljmessy",
+        "votes": 17,
+        "created_at": "2021-03-27T14:15:38.110Z"
+      }
+    ]
+  },
+  "POST /api/reviews/:review_id/comments": {
+    "description": "adds a comment by review_id, takes a username and body, and returns added comment",
+    "exampleRequest": {
+      "username": "mallionaire",
+      "body": "blah"
+    },
+    "exampleResponse": {
+      "body": "This is my comment"
+    }
+  },
+  "DELETE /api/comments/:comment_id": {
+    "description": "removes a comment by comments_id, returns nothing",
+    "exampleResponse": "No body returned for response"
+  }
+}
