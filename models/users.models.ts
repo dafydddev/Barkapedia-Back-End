@@ -66,6 +66,7 @@ export const createNewUser = (newUser: UserRequest): Promise<User> => {
   });
 };
 
+
 export const updateUserReviewUpvotes = (
   userUpvoteRequest: UserUpvoteRequest
 ): Promise<User> => {
