@@ -47,7 +47,9 @@ The project uses Firebase. More specifically, the "nc-parks". This is confirmed 
 }
 ```
 
-As well, you will need to generate a `ServiceAccount.json`. This will allow you to interact with the Firebase databse. For more information, see [Google Firebase - Admin Setup](https://firebase.google.com/docs/admin/setup). Place this in the root directory.
+You will need to generate a `ServiceAccount.json`. This will allow you to interact with the Firebase databse. For more information, see [Google Firebase - Admin Setup](https://firebase.google.com/docs/admin/setup). Place this in the root directory.
+
+As well, you will need to make sure that have the email and password sign in method enabled. For more information, see [Google Firebase - Authenticate with Firebase using Password-Based Accounts](https://firebase.google.com/docs/auth/web/password-auth)
 
 ## Running Locally 
 
