@@ -1,8 +1,8 @@
 import request from "supertest";
 import app from "../app";
-import { seedDatabase } from "../db/seed/seed";
 import userData from "../db/data/test-data/users.json";
 import { User, UserRequest } from "../types/CustomTypes";
+import { seedDatabase } from "../db/seed/seed";
 
 beforeEach(() => seedDatabase());
 afterAll(() => seedDatabase());
@@ -49,26 +49,17 @@ describe("GET /api/users/:users_id", () => {
 });
 
 describe("POST /api/users/", () => {
-  test("POST /api/users should return 201 status code when given a valid user request", () => {
-    const validUserRequest = {
-      email: "joe@example.com",
-      username: "JoeCool",
-      password: "123abc",
-      type: "consumer",
-    };
-    return request(app).post("/api/users/").send(validUserRequest).expect(201);
-  });
   test("POST /api/users/ should return the accepted user when given a valid user", () => {
     const validUserRequest: UserRequest = {
       email: "joe@example.com",
-      username: "JoeCool",
+      username: "joe123",
       password: "123abc",
       type: "consumer",
     };
     const expectUserResponse: User = {
       id: `user_${userData.length + 1}`,
       email: "joe@example.com",
-      username: "JoeCool",
+      username: "joe123",
       type: "consumer",
       isVerified: false,
       reviewUpvotes: 0,

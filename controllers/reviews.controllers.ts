@@ -1,7 +1,17 @@
-import { addNewReview, getAllReviews, getReviewByID, getReviewsByParkID, updateReviewByID, updateReviewVotesByID } from "../models/reviews.models";
+import {
+  addNewReview,
+  getAllReviews,
+  getReviewByID,
+  getReviewsByParkID,
+  updateReviewByID,
+  updateReviewVotesByID,
+} from "../models/reviews.models";
 import { NextFunction, Request, RequestHandler, Response } from "express";
-import { isValidReviewRequest, isValidReviewUpdateRequest, isValidReviewVoteRequest } from "../utils/typeGuard";
-import { getUserByID } from "../models/users.models";
+import {
+  isValidReviewRequest,
+  isValidReviewUpdateRequest,
+  isValidReviewVoteRequest,
+} from "../utils/typeGuard";
 
 export const getReviews: RequestHandler = (
   req: Request,
@@ -9,23 +19,7 @@ export const getReviews: RequestHandler = (
   next: NextFunction
 ) => {
   getAllReviews()
-    .then((returnedReviews) => {
-      const userPromises = returnedReviews.map((review) => {
-        return getUserByID(review.user_id);
-      });
-
-      Promise.all(userPromises)
-        .then((users) => {
-          const reviewsWithUsername = returnedReviews.map((review, index) => {
-            return {
-              ...review,
-              username: users[index].username,
-            };
-          });
-          res.status(200).send(reviewsWithUsername);
-        })
-        .catch(next);
-    })
+    .then((returnedReviews) => res.status(200).send(returnedReviews))
     .catch(next);
 };
 
@@ -36,23 +30,7 @@ export const getReviewsByPark: RequestHandler = (
 ) => {
   const { park_id } = req.params;
   getReviewsByParkID(park_id)
-    .then((returnedReviews) => {
-      const userPromises = returnedReviews.map((review) => {
-        return getUserByID(review.user_id)
-      })
-
-    Promise.all(userPromises)
-    .then((users) => {
-    const reviewsWithUsername = returnedReviews.map((review, index) => {
-        return {
-          ...review,
-          username: users[index].username,
-        }
-      })
-      res.status(200).send(reviewsWithUsername)
-    })
-    .catch(next)
-    })
+    .then((returnedReviews) => res.status(200).send(returnedReviews))
     .catch(next);
 };
 
@@ -79,7 +57,6 @@ export const addReview: RequestHandler = (
     addNewReview(newReview)
       .then((returnedReview) => res.status(201).send(returnedReview))
       .catch(next);
-
   }
 };
 
@@ -108,10 +85,15 @@ export const updateReview: RequestHandler = (
   const { review_id } = req.params;
   const updatedReview = req.body;
   const updatedReviewRequest = { review_id, ...updatedReview };
-  if (!review_id || !updatedReview || !isValidReviewUpdateRequest(updatedReviewRequest)) {
+  if (
+    !review_id ||
+    !updatedReview ||
+    !isValidReviewUpdateRequest(updatedReviewRequest)
+  ) {
     res.status(400).send({ msg: "Invalid review details" });
   } else {
-    updateReviewByID(updatedReviewRequest).then((returnedReview) => res.status(200).send(returnedReview))
-    .catch(next);
+    updateReviewByID(updatedReviewRequest)
+      .then((returnedReview) => res.status(200).send(returnedReview))
+      .catch(next);
   }
 };
