@@ -49,6 +49,15 @@ describe("GET /api/users/:users_id", () => {
 });
 
 describe("POST /api/users/", () => {
+  test("POST /api/users should return 201 status code when given a valid user request", () => {
+    const validUserRequest = {
+      email: "joe@example.com",
+      username: "joe123",
+      password: "123abc",
+      type: "consumer",
+    };
+    return request(app).post("/api/users/").send(validUserRequest).expect(201);
+  });
   test("POST /api/users/ should return the accepted user when given a valid user", () => {
     const validUserRequest: UserRequest = {
       email: "joe@example.com",
