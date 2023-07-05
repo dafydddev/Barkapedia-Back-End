@@ -14,29 +14,7 @@ export const getParks: RequestHandler = (
   res: Response,
   next: NextFunction
 ) => {
-  const city = req.query.city as string;
-  const rating = Number(req.query.rating) as number;
-  const isFree = Boolean(req.query.isFree) as boolean;
-  const isWellLit = Boolean(req.query.isWellLit) as boolean;
-  const isFreeParking = Boolean(req.query.isFreeParking) as boolean;
-  const isParking = Boolean(req.query.isParking) as boolean;
-  const hasAgilityEquipment = Boolean(req.query.hasAgilityEquipment) as boolean;
-  const isFullyEnclosed = Boolean(req.query.isFullyEnclosed) as boolean;
-  const hasDisabledAccess = Boolean(req.query.hasDisabledAccess) as boolean;
-  const orderBy = String(req.query.orderBy) as string;
-
-  getAllParks({
-    city,
-    rating,
-    isFree,
-    isWellLit,
-    isFreeParking,
-    isParking,
-    hasAgilityEquipment,
-    isFullyEnclosed,
-    hasDisabledAccess,
-    orderBy,
-  })
+  getAllParks()
     .then((returnedParks) => res.status(200).send(returnedParks))
     .catch(next);
 };

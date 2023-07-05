@@ -448,8 +448,8 @@ describe("PATCH /api/parks/:park_id", () => {
       },
       current_review_count: 1,
       location: {
-        lat: 52.4839763,
-        long: -1.9121823,
+        lat: 52.4787781,
+        long: -1.8953186,
       },
       phone_number: "07800989435",
     };

@@ -24,7 +24,7 @@
   "scripts": {
     "build": "tsc",
     "start": "node ./dist/listen.js",
-    "test": "jest --config=jest.config.ts --detectOpenHandles --forceExit ",
+    "test": "jest --config=jest.config.ts --detectOpenHandles --forceExit",
     "prepare": "husky install"
   }
 }

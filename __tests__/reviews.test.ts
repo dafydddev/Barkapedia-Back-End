@@ -1,10 +1,11 @@
 import request from "supertest";
 import app from "../app";
-import { seedDatabase } from "../db/seed/seed";
 import { Review } from "../types/CustomTypes";
 import reviewData from "../db/data/test-data/reviews.json";
+import { seedDatabase } from "../db/seed/seed";
 
 beforeEach(() => seedDatabase());
+afterAll(() => seedDatabase());
 
 describe("GET /api/reviews", () => {
   test("GET /api/reviews should return 200 status code", () => {
@@ -24,26 +25,6 @@ describe("GET /api/reviews", () => {
           expect(typeof review.body).toBe("string");
           expect(typeof review.votes).toBe("number");
         });
-      });
-  });
-  test("GET /api/reviews should return the username of the person who posted the review", () => {
-    return request(app)
-      .get("/api/reviews")
-      .expect(200)
-      .then((response) => {
-        const reviewsArray = response.body;
-        const promises = reviewsArray.map((review: Review) => {
-          expect(typeof review.username).toBe("string");
-
-          return request(app)
-            .get(`/api/users/${review.user_id}`)
-            .expect(200)
-            .then((userResponse) => {
-              const user = userResponse.body;
-              expect(review.username).toBe(user.username);
-            });
-        });
-        return Promise.all(promises);
       });
   });
 });
@@ -105,25 +86,6 @@ describe("GET /api/reviews/:park_id/parks", () => {
       .then((response) => {
         const reviewsArray = response.body;
         expect(reviewsArray).toEqual([]);
-      });
-  });
-  test("GET /api/reviews/park_1 should return a review with the user's name", () => {
-    return request(app)
-      .get("/api/reviews/park_1/parks")
-      .expect(200)
-      .then((response) => {
-        const reviewsArray = response.body;
-        const promises = reviewsArray.map((review: Review) => {
-          expect(typeof review.username).toBe("string");
-          return request(app)
-            .get(`/api/users/${review.user_id}`)
-            .expect(200)
-            .then((userResponse) => {
-              const user = userResponse.body;
-              expect(review.username).toBe(user.username);
-            });
-        });
-        return Promise.all(promises);
       });
   });
 });

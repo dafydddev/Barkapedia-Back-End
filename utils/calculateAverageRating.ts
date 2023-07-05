@@ -3,7 +3,7 @@ export const calculateAverageRating = (
   previousAverage: number,
   newRating: number,
   newSafety: number
-) => {
+): number => {
   if (count === 1) {
     return (newRating + newSafety) / 2;
   } else {
