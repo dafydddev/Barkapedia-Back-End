@@ -145,10 +145,14 @@ export const updateParkByID = (
   return parkRef.get().then((snapshot) => {
     if (snapshot.exists) {
       return convertAddress(updatedParkData.address.postCode).then((cords) => {
-        console.log(cords);
-        const mergedParkData = { ...snapshot.data(), ...updatedParkData, location: cords,
+        const mergedParkData = {
+          ...snapshot.data(),
+          ...updatedParkData,
+          location: cords,
         };
-        return parkRef.update(mergedParkData).then(() => mergedParkData as Park);
+        return parkRef
+          .update(mergedParkData)
+          .then(() => mergedParkData as Park);
       });
     }
     return Promise.reject({
